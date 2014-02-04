@@ -74,14 +74,19 @@ module.exports = (robot) ->
                 })
                 .get() (err, res, body) ->
                   one_movie = JSON.parse(body)
-                  add = ""
-                  add += ", Lng: #{lng}" if lng != 11 
-                  out_text = "#{title} (#{one_movie.Year})\n"
-                  out_text += "  IMDB: #{one_movie.imdbRating} MS: #{one_movie.Metascore}#{add}\n"
-                  out_text += "  #{one_movie.Plot}\n"
-                  out_text += text
                   
-                  msg.send out_text
+                  imdb = one_movie.imdbRating
+                  ms = one_movie.Metascore
+                  
+                  if parseFloat(imdb) > 5 and parseFloat(ms) > 45 
+                    add = ""
+                    add += ", Lng: #{lng}" if lng != 11 
+                    out_text = "#{title} (#{one_movie.Year})\n"
+                    out_text += "  IMDB: #{imdb} MS: #{ms}#{add}\n"
+                    out_text += "  #{one_movie.Plot}\n"
+                    out_text += text
+                  
+                    msg.send out_text
               
                   
                 

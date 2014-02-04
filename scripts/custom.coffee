@@ -1,4 +1,6 @@
 
+Util = require "util"
+
 module.exports = (robot) ->
   robot.respond /talk to me$/i, ( msg ) ->
     # Simply reply
@@ -7,3 +9,8 @@ module.exports = (robot) ->
   robot.respond /talk to me in private$/i, ( msg ) ->
     msg.envelope.user.type = 'direct'
     msg.send "Hey #{msg.envelope.user.name}! You told me in room #{msg.envelope.user.room} to talk to you."
+    
+  robot.respond /show brain data$/i, (msg) ->
+    msg.send "Brain:"
+    output = Util.inspect(robot.brain.data, {showHidden: true, depth: null, color: true})
+    msg.send output

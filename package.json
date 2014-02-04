@@ -29,7 +29,8 @@
     "hubot-gtalk-gluck":    ">= 2.0.0",
     "querystring": ">= 0.1.0",
     "scribe-node": ">= 0.0.1",
-    "jsdom": ">= 0.0.1"
+    "jsdom": ">= 0.0.1",
+    "xml2js": ">= 0.1.14"
   },
 
   "engines": {

@@ -10,5 +10,9 @@
   "whatis.coffee",
   "script.coffee",
   "setenv.coffee",
-  "eval.coffee"
+  "eval.coffee",
+  "brb.coffee",
+  "eardropping.coffee",
+  "reload.coffee",
+  "hashing.coffee"
 ]

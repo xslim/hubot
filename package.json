@@ -26,14 +26,13 @@
   "dependencies": {
     "hubot":         ">= 2.6.0 < 3.0.0",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "querystring": ">= 0.1.0",
-    "scribe-node": ">= 0.0.1",
-    "jsdom": ">= 0.0.1",
     "xml2js": ">= 0.1.14",
     "hubot-gtalk": "xslim/hubot-gtalk",
     "node-xmpp-client": ">= 0.2.3",
     "node-xmpp-core": ">= 0.4.9",
-    "ltx": ">= 0.3.4"
+    "ltx": ">= 0.3.4",
+    "scribe-node": "*",
+    "jsdom": "*"
   },
 
   "engines": {

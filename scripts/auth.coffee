@@ -53,6 +53,15 @@ module.exports = (robot) ->
         if robot.auth.hasRole(msg.envelope.user, role)
           users.push(user)
       users
+      
+    cancan: (msg, roles) ->
+      user = msg.envelope.user
+      return true if robot.auth.hasRole(user, 'admin')
+      #msg.send "Checking #{user.id} for #{roles.join(', ')}"
+      for role in roles
+        return true if robot.auth.hasRole(user, role)
+      msg.send "You don't have permission. Contact #{roles.join(', ')}"
+      return false
 
   robot.auth = new Auth
 
@@ -93,7 +102,7 @@ module.exports = (robot) ->
           user.roles = (role for role in user.roles when role isnt newRole)
           msg.reply "Ok, #{name} doesn't have the '#{newRole}' role."
 
-  robot.respond /(what role does|what roles does) @?(.+) (have)\?*$/i, (msg) ->
+  robot.respond /(what role does|what roles does|who is) @?(.+) (have)?\?*$/i, (msg) ->
     name = msg.match[2].trim()
     user = robot.brain.userForName(name)
     return msg.reply "#{name} does not exist" unless user?
@@ -107,6 +116,20 @@ module.exports = (robot) ->
       msg.reply "#{name} has no roles."
     else
       msg.reply "#{name} has the following roles: #{displayRoles.join(', ')}."
+      
+  robot.respond /what role(s)? I have$/i, (msg) ->
+    user = robot.brain.userForId(msg.message.user.id)
+    return msg.reply "Strange... You dont not exist" unless user?
+    user.roles or= []
+    displayRoles = user.roles
+
+    if user.id.toString() in admins
+      displayRoles.push('admin')
+
+    if displayRoles.length == 0
+      msg.reply "You have no roles."
+    else
+      msg.reply "You have following roles: #{displayRoles.join(', ')}."
 
   robot.respond /who has admin role\?*$/i, (msg) ->
     adminNames = []

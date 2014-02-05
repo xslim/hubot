@@ -1,1 +1,1 @@
-web: bin/hubot -a gtalk-gluck -n Hubot
+web: bin/hubot -a gtalk-xslim -n Hubot

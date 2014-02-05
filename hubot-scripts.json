@@ -1,6 +1,5 @@
 [
   "redis-brain.coffee", 
-  "shipit.coffee", 
   "responders.coffee", 
   "github-credentials.coffee",
   "oauth.coffee",
@@ -8,11 +7,8 @@
   "stagehand.coffee",
   "weather.coffee",
   "whatis.coffee",
-  "script.coffee",
-  "setenv.coffee",
-  "eval.coffee",
+  "uptime.coffee",
   "brb.coffee",
   "eardropping.coffee",
-  "reload.coffee",
   "hashing.coffee"
 ]

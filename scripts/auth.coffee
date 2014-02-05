@@ -126,9 +126,6 @@ module.exports = (robot) ->
     user.roles or= []
     displayRoles = user.roles
 
-    if user.id.toString() in admins
-      displayRoles.push('admin')
-
     if displayRoles.length == 0
       msg.reply "You have no roles."
     else

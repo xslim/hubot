@@ -1,5 +1,5 @@
 [
-  "redis-brain.coffee", 
+  "mongolab-brain.coffee", 
   "responders.coffee", 
   "github-credentials.coffee",
   "oauth.coffee",
@@ -10,5 +10,6 @@
   "uptime.coffee",
   "brb.coffee",
   "eardropping.coffee",
-  "hashing.coffee"
+  "hashing.coffee",
+  "sosearch.coffee"
 ]

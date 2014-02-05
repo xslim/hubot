@@ -39,7 +39,7 @@ module.exports = (robot) ->
 
   # Load a script
   robot.respond /script load (.*)$/i, (msg) ->
-    return unless robot.auth.cancan(msg, auth_roles)
+    return unless robot.auth.cancan(auth_roles, msg)
     script = msg.match[1]
     scriptPath = require.resolve(Path.resolve('node_modules', 'hubot-scripts', 'src', 'scripts', script))
 
@@ -48,7 +48,7 @@ module.exports = (robot) ->
 
   # List all available scripts
   robot.respond /script list\s?(-l)?/i, (msg) ->
-    return unless robot.auth.cancan(msg, auth_roles)
+    return unless robot.auth.cancan(auth_roles, msg)
     Fs.readdir Path.resolve('node_modules', 'hubot-scripts', 'src', 'scripts'), (err, files) ->
       msg.send 'An error occurred' if err
       listMode = msg.match[1]?
@@ -62,6 +62,6 @@ module.exports = (robot) ->
 
   # Print script help
   robot.respond /script info (.*)/i, (msg) ->
-    return unless robot.auth.cancan(msg, auth_roles)
+    return unless robot.auth.cancan(auth_roles, msg)
     script = msg.match[1]
     printHelp(script, msg)

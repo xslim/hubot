@@ -50,11 +50,11 @@ module.exports = (robot) ->
     usersWithRole: (role) ->
       users = []
       for own key, user of robot.brain.data.users
-        if robot.auth.hasRole(msg.envelope.user, role)
+        if robot.auth.hasRole(user, role)
           users.push(user)
       users
       
-    cancan: (msg, roles) ->
+    cancan: (roles, msg) ->
       user = msg.envelope.user
       return true if robot.auth.hasRole(user, 'admin')
       #msg.send "Checking #{user.id} for #{roles.join(', ')}"

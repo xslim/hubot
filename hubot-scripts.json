@@ -1,14 +1,12 @@
 [
-  "responders.coffee", 
+  "redis-brain.coffee",
   "github-credentials.coffee",
   "oauth.coffee",
   "remind.coffee",
-  "stagehand.coffee",
   "weather.coffee",
   "whatis.coffee",
   "uptime.coffee",
   "brb.coffee",
-  "eardropping.coffee",
   "hashing.coffee",
   "sosearch.coffee"
 ]

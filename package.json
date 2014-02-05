@@ -35,8 +35,7 @@
     "jsdom": "0.9.0",
     "faye-websocket": "faye/faye-websocket-node",
     "node-expat": "node-xmpp/node-expat",
-    "tls-connect": "dodo/node-tls-connect",
-    "mongodb": "*"
+    "tls-connect": "dodo/node-tls-connect"
   },
 
   "engines": {

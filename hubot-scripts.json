@@ -1,5 +1,5 @@
 [
-  "mongolab-brain.coffee", 
+  "redis-brain.coffee", 
   "responders.coffee", 
   "github-credentials.coffee",
   "oauth.coffee",

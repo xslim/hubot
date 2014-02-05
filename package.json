@@ -33,7 +33,8 @@
     "ltx": "astro/ltx",
     "scribe-node": "0.0.24",
     "jsdom": "0.9.0",
-    "faye-websocket": "faye/faye-websocket-node"
+    "faye-websocket": "faye/faye-websocket-node",
+    "node-expat": "node-xmpp/node-expat"
   },
 
   "engines": {

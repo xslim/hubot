@@ -65,25 +65,28 @@ module.exports = (robot) ->
 
   robot.auth = new Auth
 
+  getAmbiguousUserText = (users) ->
+    "Be more specific, I know #{users.length} people named like that: #{(user.name for user in users).join(", ")}"
+
   robot.respond /@?(.+) (has) (["'\w: -_]+) (role)/i, (msg) ->
     name    = msg.match[1].trim()
     newRole = msg.match[3].trim().toLowerCase()
 
     unless name.toLowerCase() in ['', 'who', 'what', 'where', 'when', 'why']
-      user = robot.brain.userForName(name)
-      return msg.reply "#{name} does not exist" unless user?
-      user.roles or= []
-
-      if newRole in user.roles
-        msg.reply "#{name} already has the '#{newRole}' role."
-      else
-        if newRole is 'admin'
-          msg.reply "Sorry, the 'admin' role can only be defined in the HUBOT_AUTH_ADMIN env variable."
+      users = robot.brain.usersForFuzzyName(name)
+      if users.length is 1
+        user = users[0]
+        user.roles = user.roles or [ ]
+        if newRole in user.roles
+          msg.reply "#{name} already has the '#{newRole}' role."
         else
-          myRoles = msg.message.user.roles or []
           if msg.message.user.id.toString() in admins
             user.roles.push(newRole)
             msg.reply "Ok, #{name} has the '#{newRole}' role."
+      else if users.length > 1
+        msg.send getAmbiguousUserText users
+      else
+        msg.send "I don't know anything about #{name}."
 
   robot.respond /@?(.+) (doesn't have|does not have) (["'\w: -_]+) (role)/i, (msg) ->
     name    = msg.match[1].trim()

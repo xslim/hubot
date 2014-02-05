@@ -1,5 +1,4 @@
 [
-  "redis-brain.coffee", 
   "responders.coffee", 
   "github-credentials.coffee",
   "oauth.coffee",

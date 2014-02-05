@@ -41,5 +41,9 @@
   "engines": {
     "node": "= 0.10.25",
     "npm":  "= 1.3.24"
+  },
+  
+  "scripts": {
+    "test": "coffee -c -o tmp scripts"
   }
 }

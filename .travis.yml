@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "0.10.25"
+deploy:
+  provider: heroku
+  api_key:
+    secure: PzX65jvd6xP+Q6Dg/TQ987W+IqQ7cku3TqUU9gtcT9RZZhD/N7aJjzMffjk5sibmXAesqhotju8nkzMYJeO78j2u2N2GZYYn8UEptGCsYvh6ADMdHhyIGBPritN92WaZXTbdrldO/WknH+ErpCYO5TjtwEehb6xN3aK2XeAjjUY=
+  app: kalapun-hubot

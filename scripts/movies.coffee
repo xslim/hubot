@@ -23,9 +23,16 @@ module.exports = (robot) ->
     daysOffset = 0 if day is "today"
     daysOffset = 1 if day is "tomorrow"
     
+    debugMode = false
+    
     #msg.send Util.inspect(msg.match, false, 2)
     msg.send "Movies #{day} in #{location} Pathe:"
+    msg.send "Debug mode" if debugMode
     #return
+    
+    # today = new Date()
+    # today_time = today.getTime()
+    # min_div = 216000
     
     movies = []
     
@@ -42,10 +49,14 @@ module.exports = (robot) ->
         parser = new XMLJS.Parser(explicitArray: true)
         parser.parseString body, (err, result) ->
           
-          p_movies = result.swresponse.Message[0].Shows
+          resp = result.swresponse or result
+          msg.send Util.inspect(resp, false, 2) if debugMode
+          
+          p_movies = resp.Message[0].Shows
           p_movies[0].Show.forEach (show) ->
             lng = parseInt(show.LanguageVersionID[0], 10)
             title = show.EventName[0]
+            showtimes = []
             
             nl_match = /NL/.test(title)
             
@@ -55,12 +66,29 @@ module.exports = (robot) ->
               text = ""
               # text += "#{title}\n"
               
+              trailer = show.sw_trailerlink or ''
+
               #msg.send Util.inspect(show.sw_showtimes, false, 4)
               show.sw_showtimes.forEach (st) ->
-                #msg.send Util.inspect(st, false, 2)
-                site = getCinema(st['$'].SiteID, cinemas)
-                t = st['_']
-                text += "  #{site}: #{t}\n"
+                #msg.send Util.inspect(st, false, 2) if debugMode
+                x_site = st['$'] or st['@']
+                site = getCinema(x_site.SiteID, cinemas)
+                t = st['_'] or st['#']
+                # times = t.split ' '
+                # 
+                # if day is "today" and times
+                #   times.forEach (t_str) ->
+                #     d = new Date()
+                #     t = t_str.split ':'
+                #     d.setHours(t[0])
+                #     d.setMinutes(t[1])
+                #     t = d.getTime()
+                #     diff = (t - today_time) / min_div
+                #     msg.send "#{t_str}: #{t} - #{today_time} = #{diff}" if debugMode
+                #     
+                # 
+                # showtimes.push "#{site}: #{times.join(' ')}"
+                showtimes.push "#{site}: #{t}"
                 
               q_title = title
               q_title = q_title.replace /IMAX/i, ''
@@ -84,7 +112,8 @@ module.exports = (robot) ->
                     out_text = "#{title} (#{one_movie.Year})\n"
                     out_text += "  IMDB: #{imdb} MS: #{ms}#{add}\n"
                     out_text += "  #{one_movie.Plot}\n"
-                    out_text += text
+                    out_text += "  #{trailer}\n"
+                    out_text += "  #{showtimes.join(', ')}"
                   
                     msg.send out_text
               

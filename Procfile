@@ -1,1 +1,1 @@
-web: bin/hubot -a gtalk -n Hubot --enable-slash
+web: bin/hubot -a gtalk --alias -n Hubot

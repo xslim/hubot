@@ -1,1 +1,1 @@
-web: bin/hubot -a gtalk --alias "/"
+web: bin/hubot -a gtalk -l /

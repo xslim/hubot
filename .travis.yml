@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "0.10.25"
 cache:
-  bundler
+  bundler: true
   directories:
     - node_modules
 deploy:

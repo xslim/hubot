@@ -39,15 +39,16 @@ compputeFromReq = (req) ->
   if key? && text?
     hash = hmacsha1(text, key)
     
-  if req.accepts('json')
-    hash = JSON.stringify({"hash": hash})
-    
   return hash
 
 module.exports = (robot) ->
-
-  robot.router.get "/rest/hmac", (req, res) ->
+  
+  # GET & POST
+  robot.router.all "/rest/hmac", (req, res) ->
     res.end compputeFromReq(req)
 
-  robot.router.post "/rest/hmac", (req, res) ->
-    res.end compputeFromReq(req)
+  # GET & POST
+  robot.router.all "/rest/hmac.json", (req, res) ->
+    hash = compputeFromReq(req)
+    hash = JSON.stringify({"hash": hash})
+    res.end hash

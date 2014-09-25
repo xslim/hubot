@@ -24,4 +24,4 @@ module.exports = (robot) ->
     res.end "PONG"
 
   robot.router.get "/rest/test", (req, res) ->
-    res.end "Requested: #{req.params}"
+    res.end "Requested: #{req.query}" + "\n"+JSON.stringify(req, null, 2)

@@ -38,6 +38,10 @@ compputeFromReq = (req) ->
   hash = ""
   if key? && text?
     hash = hmacsha1(text, key)
+    
+  if req.accepts('json')
+    hash = JSON.stringify({"hash": hash})
+    
   return hash
 
 module.exports = (robot) ->

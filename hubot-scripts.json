@@ -8,5 +8,6 @@
   "uptime.coffee",
   "brb.coffee",
   "hashing.coffee",
-  "sosearch.coffee"
+  "sosearch.coffee",
+  "keep-alive.coffee"
 ]
